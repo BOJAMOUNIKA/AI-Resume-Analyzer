@@ -1,7 +1,20 @@
 import pandas as pd
+import os
+
+# Get absolute path
+BASE_DIR = os.path.dirname(
+    os.path.dirname(os.path.abspath(__file__))
+)
+
+# Dataset path
+dataset_path = os.path.join(
+    BASE_DIR,
+    "datasets",
+    "job_roles.csv"
+)
 
 # Load dataset
-jobs_df = pd.read_csv("../datasets/job_roles.csv")
+jobs_df = pd.read_csv(dataset_path)
 
 def recommend_jobs(resume_skills):
 
@@ -34,7 +47,6 @@ def recommend_jobs(resume_skills):
             "match": round(match_percentage, 2)
         })
 
-    # Sort by highest match
     recommendations = sorted(
         recommendations,
         key=lambda x: x['match'],
