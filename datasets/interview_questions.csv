@@ -1,0 +1,17 @@
+skill,question
+Python,What are Python decorators?
+Python,Difference between list and tuple?
+Python,Explain *args and **kwargs.
+Machine Learning,What is overfitting?
+Machine Learning,Explain bias vs variance.
+Machine Learning,What is cross-validation?
+Deep Learning,What is CNN?
+Deep Learning,Difference between CNN and RNN?
+NLP,What is tokenization?
+NLP,Explain stemming vs lemmatization.
+SQL,What is normalization?
+SQL,Difference between WHERE and HAVING?
+AWS,What is EC2?
+AWS,Difference between S3 and EBS?
+React,What is virtual DOM?
+React,Explain React hooks.
