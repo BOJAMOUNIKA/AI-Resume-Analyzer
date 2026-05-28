@@ -2,12 +2,12 @@ import streamlit as st
 import sys
 import os
 
-# Add backend path
+# Add backend folder to path
 sys.path.append(
     os.path.abspath(
         os.path.join(
             os.path.dirname(__file__),
-            '../backend'
+            "../backend"
         )
     )
 )
@@ -25,7 +25,7 @@ st.set_page_config(
     layout="wide"
 )
 
-# Title
+# App title
 st.title("📄 AI Resume Analyzer")
 
 st.write(
@@ -39,10 +39,10 @@ uploaded_file = st.file_uploader(
     type=["pdf"]
 )
 
-# Run analysis only after upload
+# Process uploaded resume
 if uploaded_file is not None:
 
-    # Create temp upload folder
+    # Create temp upload directory
     upload_dir = "temp_uploads"
 
     os.makedirs(upload_dir, exist_ok=True)
@@ -62,7 +62,7 @@ if uploaded_file is not None:
     # Extract skills
     skills = extract_skills(text)
 
-    # ATS target skills
+    # Target job skills
     target_skills = [
         "Python",
         "SQL",
@@ -72,7 +72,7 @@ if uploaded_file is not None:
         "Deep Learning"
     ]
 
-    # ATS analysis
+    # ATS score analysis
     ats_result = calculate_ats_score(
         skills,
         target_skills
@@ -84,43 +84,43 @@ if uploaded_file is not None:
     # Interview questions
     questions = generate_questions(skills)
 
-    # Save analysis to database
+    # Save analysis in database
     recommended_roles = [
-        job['role']
+        job["role"]
         for job in recommendations
     ]
 
     save_analysis(
         uploaded_file.name,
-        ats_result['score'],
+        ats_result["score"],
         skills,
         recommended_roles
     )
 
-    # ATS Score
+    # ATS Score section
     st.subheader("📊 ATS Score")
 
     st.progress(
-        int(ats_result['score'])
+        int(ats_result["score"])
     )
 
     st.write(
         f"ATS Score: {ats_result['score']}%"
     )
 
-    # Detected skills
+    # Detected Skills section
     st.subheader("🛠 Detected Skills")
 
     for skill in skills:
         st.success(skill)
 
-    # Missing skills
+    # Missing Skills section
     st.subheader("❌ Missing Skills")
 
-    for skill in ats_result['missing_skills']:
+    for skill in ats_result["missing_skills"]:
         st.warning(skill)
 
-    # Recommended roles
+    # Recommended Roles section
     st.subheader("💼 Recommended Roles")
 
     for job in recommendations:
@@ -130,7 +130,7 @@ if uploaded_file is not None:
             f"({job['match']}% match)"
         )
 
-    # Interview Questions
+    # Interview Questions section
     st.subheader("🎯 Interview Questions")
 
     for skill, ques_list in questions.items():
@@ -140,7 +140,7 @@ if uploaded_file is not None:
         for q in ques_list:
             st.write(f"• {q}")
 
-# Analysis History
+# Analysis History section
 st.subheader("📁 Previous Analyses")
 
 history = get_all_analyses()
